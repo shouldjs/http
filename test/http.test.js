@@ -1,4 +1,5 @@
-var should = require('../');
+var should = require('should');
+require('../');
 
 var assert = require('assert');
 

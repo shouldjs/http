@@ -25,13 +25,11 @@ module.exports = function(should, Assertion) {
   });
 
   Assertion.add('json', function() {
-    this.have.property('headers')
-      .and.have.property('content-type').include('application/json');
+    this.have.header('content-type').match(/application\/json/i);
   }, true);
 
   Assertion.add('html', function() {
-    this.have.property('headers')
-      .and.have.property('content-type').include('text/html');
+    this.have.header('content-type').match(/text\/html/i);
   }, true);
 };
 

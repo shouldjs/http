@@ -4,7 +4,7 @@
   "description": "Http requests, response assertions for should.js",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/**.test.js"
+    "test": "mocha --reporter mocha-better-spec-reporter test/**.test.js"
   },
   "repository": {
     "type": "git",
