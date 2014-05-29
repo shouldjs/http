@@ -1,0 +1,32 @@
+{
+  "name": "should-http",
+  "version": "0.0.1",
+  "description": "Http requests, response assertions for should.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/**.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/shouldjs/http.git"
+  },
+  "keywords": [
+    "should",
+    "should.js",
+    "http"
+  ],
+  "author": "TJ Holowaychuk <tj@vision-media.ca> and contributors",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shouldjs/http/issues"
+  },
+  "homepage": "https://github.com/shouldjs/http",
+  "devDependencies": {
+    "mocha-better-spec-reporter": "latest",
+    "mocha": "latest",
+    "should": "latest"
+  },
+  "peerDependencies": {
+    "should": ">= 4.x"
+  }
+}
