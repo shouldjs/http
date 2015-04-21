@@ -43,10 +43,10 @@ module.exports = function(should, Assertion) {
    * res.should.have.status(200);
    */
   Assertion.add('status', function(code) {
-    //this.params = { operator: 'to have response code ' + code + ' ' + i(statusCodes[code])
-    // + ', but got ' + this.obj.statusCode + ' ' + i(statusCodes[this.obj.statusCode]) }
+    var obj = this.obj;
+    var copy = { body: obj.body, statusCode: obj.statusCode };
 
-    this.have.property('statusCode', code);
+    copy.should.have.property('statusCode', code);
   });
 
   /**
