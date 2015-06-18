@@ -58,11 +58,11 @@ module.exports = function(should, Assertion) {
    * @module should-http
    * @example
    *
-   * res.should.be.json;
+   * res.should.be.json();
    */
   Assertion.add('json', function() {
     this.have.header('content-type').match(/application\/json/i);
-  }, true);
+  });
 
   /**
    * Shortcut for .should.header('content-type', 'text/html')
@@ -73,10 +73,10 @@ module.exports = function(should, Assertion) {
    * @module should-http
    * @example
    *
-   * res.should.be.json;
+   * res.should.be.html();
    */
   Assertion.add('html', function() {
     this.have.header('content-type').match(/text\/html/i);
-  }, true);
+  });
 };
 

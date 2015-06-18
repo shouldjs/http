@@ -22,7 +22,7 @@ describe('http', function() {
       }
     };
 
-    req.should.be.json;
+    req.should.be.json();
 
     req = {
       headers: {
@@ -30,7 +30,7 @@ describe('http', function() {
       }
     };
 
-    req.should.be.json;
+    req.should.be.json();
 
     req = {
       headers: {
@@ -38,9 +38,9 @@ describe('http', function() {
       }
     };
 
-    req.should.not.be.json;
+    req.should.not.be.json();
 
-    ({}).should.not.be.json;
+    ({}).should.not.be.json();
   });
 
   it('test .status', function() {
