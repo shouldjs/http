@@ -43,6 +43,34 @@ describe('http', function() {
     ({}).should.not.be.json();
   });
 
+  it('test .xml', function(){
+    var req = {
+      headers: {
+        'content-type': 'application/xml'
+      }
+    };
+
+    req.should.be.xml();
+
+    req = {
+      headers: {
+        'content-type': 'application/xml; charset=utf-8'
+      }
+    };
+
+    req.should.be.xml();
+
+    req = {
+      headers: {
+        'content-type': 'text/html'
+      }
+    };
+
+    req.should.not.be.xml();
+
+    ({}).should.not.be.xml();
+  });
+
   it('test .status', function() {
     ({ statusCode: 300 }).should.have.not.status(200);
 

@@ -78,5 +78,20 @@ module.exports = function(should, Assertion) {
   Assertion.add('html', function() {
     this.have.header('content-type').match(/text\/html/i);
   });
+
+  /**
+   * Shortcut for .should.header('content-type', 'application/xml')
+   *
+   * @name xml
+   * @memberOf Assertion
+   * @category assertion http
+   * @module should-http
+   * @example
+   *
+   * res.should.be.xml();
+   */
+  Assertion.add('xml', function() {
+    this.have.header('content-type').match(/application\/xml/i);
+  });
 };
 
