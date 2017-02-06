@@ -1,11 +1,42 @@
-/*!
- * Should
- * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
+/*
+ * should-http
+ * Copyright(c) 2010-2013 TJ Holowaychuk <tj@vision-media.ca>
+ * Copyright(c) 2013-2016 Denis Bardadym <bardadymchik@gmail.com>
  * MIT Licensed
  */
 
+var contentType = require('content-type');
+var http = require('http');
+
 module.exports = function(should, Assertion) {
   var i = should.format;
+  var t = should.modules.type;
+  var format = should.modules.format;
+
+  var NODE_HTTP_INCOMMING_MESSAGE = new t.Type(t.OBJECT, 'node-http-incomming-message');
+
+  t.checker.addBeforeFirstMatch({}, function(obj) {
+    if (obj instanceof http.IncomingMessage) {
+      return NODE_HTTP_INCOMMING_MESSAGE;
+    }
+  });
+
+  var FIELDS = {
+    headers: true,
+    httpVersion: true,
+    method: true,
+    statusCode: true,
+    url: true,
+    body: true
+  };
+
+  format.Formatter.addType(NODE_HTTP_INCOMMING_MESSAGE, function(value) {
+    return format.formatPlainObject.call(this, value, {
+      filterKey: function(key) {
+        return key in FIELDS;
+      }
+    });
+  });
 
   /**
    * Asserts given object has property headers which contain `field` and optional `val`. Will work well with node Request/Response etc.
@@ -21,12 +52,15 @@ module.exports = function(should, Assertion) {
    * res.should.have.header('content-type', 'application/json');
    */
   Assertion.add('header', function(field, val) {
-    this.have.property('headers');
-    this.params = { obj: '{ ..., headers: ' + i(this.obj) + ', ... }', operator: 'to have header ' + i(field) + (val !== undefined ? (':' + i(val)) : '') };
-    if (val !== undefined) {
-      this.have.property(field.toLowerCase(), val);
+    var obj = this.obj;
+
+    var assert = should(obj).have.property('headers');
+
+    this.params = { operator: 'to have header ' + i(field) + (val !== undefined ? (':' + i(val)) : '') };
+    if (val != null) {
+      assert.have.property(field.toLowerCase(), val);
     } else {
-      this.have.property(field.toLowerCase());
+      assert.have.property(field.toLowerCase());
     }
   });
 
@@ -44,9 +78,8 @@ module.exports = function(should, Assertion) {
    */
   Assertion.add('status', function(code) {
     var obj = this.obj;
-    var copy = { body: obj.body, statusCode: obj.statusCode };
 
-    copy.should.have.property('statusCode', code);
+    obj.should.have.property('statusCode', code);
   });
 
   /**
@@ -61,7 +94,7 @@ module.exports = function(should, Assertion) {
    * res.should.be.json();
    */
   Assertion.add('json', function() {
-    this.have.header('content-type').match(/application\/json/i);
+    this.have.contentType('application/json');
   });
 
   /**
@@ -76,7 +109,7 @@ module.exports = function(should, Assertion) {
    * res.should.be.html();
    */
   Assertion.add('html', function() {
-    this.have.header('content-type').match(/text\/html/i);
+    this.have.contentType('text/html');
   });
 
   /**
@@ -91,7 +124,26 @@ module.exports = function(should, Assertion) {
    * res.should.be.xml();
    */
   Assertion.add('xml', function() {
-    this.have.header('content-type').match(/application\/xml/i);
+    this.have.contentType('application/xml');
+  });
+
+  /**
+   * Check if response have header content-type with given type and charset
+   *
+   * @name contentType
+   * @memberOf Assertion
+   * @category assertion http
+   * @module should-http
+   * @param {string} type
+   * @param {string} [charset]
+   */
+  Assertion.add('contentType', function(type, charset) {
+    this.have.header('content-type');
+
+    var ct = contentType.parse(this.obj); //changed by previous assertion
+    should(ct.type).match(type);
+    if(charset != null) {
+      should(ct.parameters).have.property('charset').which.match(charset);
+    }
   });
 };
-

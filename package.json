@@ -1,6 +1,6 @@
 {
   "name": "should-http",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "Http requests, response assertions for should.js",
   "main": "index.js",
   "scripts": {
@@ -28,5 +28,8 @@
   },
   "peerDependencies": {
     "should": ">= 4.x"
+  },
+  "dependencies": {
+    "content-type": "^1.0.2"
   }
 }
