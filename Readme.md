@@ -33,7 +33,7 @@ res.should.have.header('content-length');
 res.should.have.header('Content-Length', '123');
 ```
 
-## .json
+## .json()
 
 Assert that Content-Type is "application/json"
 
@@ -41,14 +41,14 @@ Assert that Content-Type is "application/json"
 res.should.be.json()
 ```
 
-## .html
+## .html()
 
 Assert that Content-Type is "text/html"
 ```javascript
 res.should.be.html()
 ```
 
-## .xml
+## .xml()
 
 Assert that Content-Type is "application/xml"
 
