@@ -16,9 +16,12 @@ const PORT = 8888;
 
 server.listen(PORT);
 
-http.get({
-  hostname: 'localhost',
-  port: PORT
-}, (res) => {
-  res.should.not.be.json();
+it('should format IncommingMessage', (done) => {
+  http.get({
+    hostname: 'localhost',
+    port: PORT
+  }, (res) => {
+    res.should.not.be.json();
+    done();
+  });
 });

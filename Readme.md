@@ -16,6 +16,8 @@ require('should-http');
 
 That row patch your should instance adding assertions. With mocha you can use it via `-r` switch.
 
+This module have built in formatting for node http IncommingMessage's.
+
 ## .status(code)
 
 Asserts that `.statusCode` is `code`:
@@ -31,17 +33,33 @@ res.should.have.header('content-length');
 res.should.have.header('Content-Length', '123');
 ```
 
-## .json
+## .json()
 
-Assert that Content-Type is "application/json; charset=utf-8"
+Assert that Content-Type is "application/json"
 
 ```javascript
-res.should.be.json
+res.should.be.json()
 ```
 
-## .html
+## .html()
 
-Assert that Content-Type is "text/html; charset=utf-8"
+Assert that Content-Type is "text/html"
 ```javascript
-res.should.be.html
+res.should.be.html()
+```
+
+## .xml()
+
+Assert that Content-Type is "application/xml"
+
+```js
+res.should.be.xml()
+```
+
+## .contentType(type [, charset])
+
+Assert that Content-Type is a given `type` with optional `charset`
+
+```js
+res.should.have.contentType('application/xml');
 ```
