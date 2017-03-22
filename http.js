@@ -6,37 +6,9 @@
  */
 
 var contentType = require('content-type');
-var http = require('http');
 
 module.exports = function(should, Assertion) {
   var i = should.format;
-  var t = should.modules.type;
-  var format = should.modules.format;
-
-  var NODE_HTTP_INCOMMING_MESSAGE = new t.Type(t.OBJECT, 'node-http-incomming-message');
-
-  t.checker.addBeforeFirstMatch({}, function(obj) {
-    if (obj instanceof http.IncomingMessage) {
-      return NODE_HTTP_INCOMMING_MESSAGE;
-    }
-  });
-
-  var FIELDS = {
-    headers: true,
-    httpVersion: true,
-    method: true,
-    statusCode: true,
-    url: true,
-    body: true
-  };
-
-  format.Formatter.addType(NODE_HTTP_INCOMMING_MESSAGE, function(value) {
-    return format.formatPlainObject.call(this, value, {
-      filterKey: function(key) {
-        return key in FIELDS;
-      }
-    });
-  });
 
   /**
    * Asserts given object has property headers which contain `field` and optional `val`. Will work well with node Request/Response etc.

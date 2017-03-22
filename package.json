@@ -1,8 +1,9 @@
 {
   "name": "should-http",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Http requests, response assertions for should.js",
   "main": "index.js",
+  "browser": "index-browser.js",
   "scripts": {
     "test": "mocha --reporter mocha-better-spec-reporter test/**.test.js"
   },
@@ -22,8 +23,10 @@
   },
   "homepage": "https://github.com/shouldjs/http",
   "devDependencies": {
-    "mocha-better-spec-reporter": "latest",
+    "eslint": "^3.18.0",
+    "eslint-config-shouldjs": "^1.0.2",
     "mocha": "latest",
+    "mocha-better-spec-reporter": "latest",
     "should": "latest"
   },
   "peerDependencies": {
