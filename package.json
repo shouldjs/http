@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/shouldjs/http",
   "devDependencies": {
-    "eslint": "^3.18.0",
+    "eslint": "^6.6.0",
     "eslint-config-shouldjs": "^1.0.2",
     "mocha": "latest",
     "mocha-better-spec-reporter": "latest",
